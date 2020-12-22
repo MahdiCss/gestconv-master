@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Conventions</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"
+          th:href="@{/css/bootstrap.css/}">
+    <link rel="stylesheet" type="text/css" href="../static/css/myStyle.css"
+          th:href="@{/css/myStyle.css/}">
+</head>
+<script>
+    function printpage() {
+        window.print();
+    }
+</script>
+<body>
+<div class="container spacer">
+    <form th:action="@{Index}" method="get" class="col-md-6">
+        <div class="form-group">
+            <label>Mot clé: </label>
+            <input  type="text" name="motCle" />
+            <button type="submit">Search</button>
+        </div>
+    </form>
+    <form class="button col-md-2">
+        <input type="submit" value="Print Result"  onclick="printpage()"/>
+    </form>
+    <form class="button col-md-2" th:action="@{form}" method="GET">
+        <input type="submit" value="Add"/>
+    </form>
+
+
+</div>
+<div class="container-fluid ">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Objet</th>
+        <th>Participant1</th>
+        <th>Participant2</th>
+        <th>Participant3</th>
+        <th>Participant4</th>
+        <th>Date Edition</th>
+        <th>Date signature Participant 1</th>
+        <th>Date signature Participant 2</th>
+        <th>Date signature Participant 3</th>
+        <th>Date signature Participant 4</th>
+        <th>Date Entrée en Vigueur</th>
+        <th>Date Expiration</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c:${convention}">
+        <td>
+            <form th:action="@{edit(id=${c.id})}" method="post">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{supprimer(id=${c.id})}" method="post">
+                <button type="submit" onclick="return confirm('confirmer la suppression ?')">Delete</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{imprimer(id=${c.id})}" method="post">
+                <button type="submit">Print</button>
+            </form>
+        </td>
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.type}"></td>
+        <td th:text="${c.objet}"></td>
+        <td th:text="${c.participant1}"></td>
+        <td th:text="${c.participant2}"></td>
+        <td th:text="${c.participant3}"></td>
+        <td th:text="${c.participant4}"></td>
+        <td th:text="${c.date_edition}"></td>
+        <td th:text="${c.date_signature_partcipant1}"></td>
+        <td th:text="${c.date_signature_partcipant2}"></td>
+        <td th:text="${c.date_signature_partcipant3}"></td>
+        <td th:text="${c.date_signature_partcipant4}"></td>
+        <td th:text="${c.date_entree_en_vigueur}"></td>
+        <td th:text="${c.date_expiration}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+<div class="container-fluid">
+<ul class="nav nav-pills">
+    <li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+        <a th:text="${p}" th:href="@{Index(page=${p})}" ></a>
+    </li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimer la Convention</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"
+          th:href="@{/css/bootstrap.css/}">
+    <link rel="stylesheet" type="text/css" href="../static/css/myStyle.css"
+          th:href="@{/css/myStyle.css/}">
+</head>
+<script>
+    function printpage() {
+        window.print();
+    }
+</script>
+<body>
+
+<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 spacer">
+    <div class="panel panel-default ">
+        <div class="panel-heading text-center"><H2>Convention N° <span th:text=" ${convention.getId()}"></span></H2> </div>
+        <div class="panel-body">
+
+            <h4>Type de Convention : <span th:text="${convention.getType()}"></span></h4> <br>
+            <h4>Objet de Convention : <span th:text="${convention.getObjet()}"></span> </h4><br>
+            <h4>Les participants et leurs Dates de Signatures : <br> <br>
+               <div class="container">
+                <span th:text="${convention.getParticipant1()}"></span>  <span th:text="${convention.getDate_signature_partcipant1()}"></span>
+                <br>
+                <span th:text="${convention.getParticipant2()}"></span>   <span th:text="${convention.getDate_signature_partcipant2()}"></span>
+                <br th:if="${convention.getParticipant3() != ''}">
+                <span th:if="${convention.getParticipant3() != ''}" th:text="${convention.getParticipant3()}"></span>    <span th:text="${convention.getDate_signature_partcipant3()}"></span>
+                <br th:if="${convention.getParticipant4() != ''}">
+                <span th:if="${convention.getParticipant4() != ''}" th:text="${convention.getParticipant4()}"></span>    <span th:text="${convention.getDate_signature_partcipant4()}"></span>
+               </div>
+           </h4> <br>
+
+
+
+            <h4>La date d'entrée en vigueur : <span th:text=" ${convention.getDate_entree_en_vigueur()}"></span> </h4><br>
+            <h4>La date d'édition : <span th:text=" ${convention.getDate_edition()}"></span>  </h4>  <br>
+            <h4>La date d'expiration : <span th:text=" ${convention.getDate_expiration()}"></span></h4> <br>
+
+        </div>
+        <form>
+            <div class="panel-footer text-center">
+                <input type="button" onclick="printpage()" value="Imprimer la Convention"/>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>
